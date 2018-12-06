@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  app:
+    image: kevinduy/blockchain
+    restart: always
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./:/app
+    working_dir: /app
+    ports:
+      - "3000:3000"
+      - "8080:8080"
+      - "9005:9005"
+      - "46658:46658"
+    links:
+      - mongodb
+    tty: true
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - .docker/db:/data/db
